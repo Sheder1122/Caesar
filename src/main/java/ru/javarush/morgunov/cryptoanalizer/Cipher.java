@@ -1,5 +1,3 @@
-package ru.javarush.morgunov.cryptoanalizer;
-
 import java.util.List;
 
 public class Cipher {
@@ -25,7 +23,6 @@ public class Cipher {
                 int newIndex = (index + shift) % alphabetSize;
                 result.append(alphabet.get(newIndex));
             } else {
-                // символ не из алфавита – оставляем как есть
                 result.append(c);
             }
         }

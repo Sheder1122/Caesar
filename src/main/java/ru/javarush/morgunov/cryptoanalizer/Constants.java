@@ -1,5 +1,3 @@
-package ru.javarush.morgunov.cryptoanalizer;
-
 import java.util.Arrays;
 import java.util.List;
 

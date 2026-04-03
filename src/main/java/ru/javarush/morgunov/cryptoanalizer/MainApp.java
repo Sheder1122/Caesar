@@ -1,5 +1,3 @@
-package ru.javarush.morgunov.cryptoanalizer;
-
 import java.util.Scanner;
 
 public class MainApp {
@@ -104,10 +102,19 @@ public class MainApp {
             }
             System.out.print("Введите путь для сохранения результата: ");
             String dest = scanner.nextLine();
+            System.out.print("Укажите файл-образец (эталонный текст, Enter если нет): ");
+            String sample = scanner.nextLine().trim();
+
             String encrypted = FileManager.readFile(src);
-            String decrypted = bruteForce.bruteForceDecrypt(encrypted);
+            String decrypted;
+            if (!sample.isEmpty() && Validator.isFileExists(sample)) {
+                String sampleText = FileManager.readFile(sample);
+                decrypted = bruteForce.bruteForceWithSample(encrypted, sampleText);
+            } else {
+                decrypted = bruteForce.bruteForceDecrypt(encrypted);
+            }
             FileManager.writeFile(decrypted, dest);
-            System.out.println("Brute force завершён. Возможный результат в файле: " + dest);
+            System.out.println("Brute force завершён. Результат в файле: " + dest);
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
@@ -121,7 +128,7 @@ public class MainApp {
                 System.out.println("Файл не существует!");
                 return;
             }
-            System.out.print("Введите путь к файлу с эталонным текстом (например, другой текст того же автора): ");
+            System.out.print("Введите путь к файлу с эталонным текстом: ");
             String repFile = scanner.nextLine();
             if (!Validator.isFileExists(repFile)) {
                 System.out.println("Эталонный файл не существует!");

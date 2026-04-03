@@ -1,5 +1,3 @@
-package ru.javarush.morgunov.cryptoanalizer;
-
 import java.util.HashMap;
 import java.util.Map;
 
